@@ -1,14 +1,8 @@
-/**
- * TODO: Pouvoir subscribe a certains states seulement et receuillir ses states dans les parametres de la fonction subscribe
- * 
- * Leive.js
- * Made by Alexis PROVOT
- * GitHub: @Silaex
- * version 0.1.0
- */
-
-function State() {
+function Leive() {
     const store = {};
+    /**
+     * @type {[{ fnc: Function, states: string[] }]}
+     */
     const subscribedFunctions = [];
 
     /**
@@ -71,7 +65,21 @@ function State() {
         if (typeVerification(name, "string")) {
             if (name in store) {
                 store[name] = data;
-                subscribedFunctions.forEach(sf => sf.apply(null, null));
+
+                subscribedFunctions.forEach(function(subFunction) {
+                    const { fnc, states } = subFunction;
+                    if (states.includes(name)) {
+                        const statesParams = {};
+                        states.forEach(function (state) {
+                            /**
+                             * @type {{ state }} statesParams
+                             */
+                            statesParams[state] = getState(state);
+                        });
+                        fnc.apply(null, [statesParams]);
+                    }
+                });
+
             } else {
                 throw ReferenceError("Unknown state")
             }
@@ -83,11 +91,17 @@ function State() {
     /**
      * @description Permet d'affecter une fonction pour que lorsqu'un **dispatch** est effectuer celle-ci soit activée
      * @param {Function} callback 
+     * @param {string[]} states - Liste de nom de state
      * @returns {Function} Retourne la fonction **unsubscribe** permettant de retirer l'activation fonction
      */
-    function subscribe(callback) {
-        if (typeVerification(callback, "function")) {
-            subscribedFunctions.push(callback);
+    function subscribe(callback, states) {
+        if (typeVerification([callback, states], ["function", "object"])) {
+            // On essaie d'accéder aux states renseignés
+            states.forEach(state => getState(state));
+            subscribedFunctions.push({
+                fnc: callback,
+                states
+            });
             return {
                 unsubscribe: () => unsubscribe(callback)
             };
@@ -119,4 +133,4 @@ function State() {
     };
 }
 
-export default State();
+export default Leive();

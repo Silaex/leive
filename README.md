@@ -1,5 +1,5 @@
 Auteur: Silaex
-Version: 0.1.0
+Version: 0.2.0
 
 - [Leive](#leive)
   - [Objectifs de cette librairie](#objectifs-de-cette-librairie)
@@ -15,4 +15,5 @@ Version: 0.1.0
 
 ### TODO: 
 
-- Pouvoir subscribe a certains states seulement et receuillir ses states dans les parametres de la fonction subscribe
+- Pouvoir subscribe a certains states seulement et receuillir ses states dans les parametres de la fonction subscribe ✅
+- Pouvoir créer un **store** avec des states de base et definir les actions précise lors du **dispatch** du state
