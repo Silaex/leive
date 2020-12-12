@@ -2,12 +2,12 @@ Auteur: Silaex
 Version: 0.2.0
 
 - [Leive](#leive)
-  - [Objectifs de cette librairie](#objectifs-de-cette-librairie)
+  - [Objectifs de cette bibliothèque](#objectifs-de-cette-bibliothèque)
     - [TODO:](#todo)
 
 # Leive
 
-## Objectifs de cette librairie
+## Objectifs de cette bibliothèque
 
 - Pouvoir avoir un système de state personnel
 - Avoir pu faire une *"recherche"* sur comment pouvez fonctionner ce système
